@@ -1,0 +1,332 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "career-portal": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/career-portal/browser",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/novo-elements"
+              ]
+            },
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/static/custom.css",
+              "src/static/privacy-policy.html",
+              "src/app.json",
+              "src/version.txt",
+              {
+                "glob": "**/*",
+                "input": "src/static/i18n/",
+                "output": "/i18n/"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/bullhorn-icons/fonts/Bullhorn-Glyphicons.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "dev": {
+              "baseHref": ".",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "static": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": ".",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/static",
+                  "output": "/",
+                  "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.static.ts"
+                }
+              ]
+            },
+            "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": ".",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/qa",
+                  "output": "/",
+                  "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.static.ts"
+                }
+              ]
+            },
+            "dynamic": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": "/",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/dynamic",
+                  "output": "/",
+                  "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
+            },
+            "dynamicDev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "baseHref": "/",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "career-portal:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "career-portal:build:production"
+            },
+            "static": {
+              "browserTarget": "career-portal:build:dev"
+            },
+            "qa": {
+              "browserTarget": "career-portal:build:qa"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "career-portal:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json",
+              "src/tsconfig.server.json",
+              "cypress/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "career-portal:build",
+            "serverTarget": "career-portal:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "career-portal:build:production",
+              "serverTarget": "career-portal:server:production"
+            },
+            "dynamic": {
+              "browserTarget": "career-portal:build:dynamicDev",
+              "serverTarget": "career-portal:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "career-portal:build:production",
+            "serverTarget": "career-portal:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/career-portal/server",
+            "main": "server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "sourceMap": false,
+              "optimization": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "career-portal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "career-portal:serve:static"
+            },
+            "qa": {
+              "devServerTarget": "career-portal:serve:qa"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "career-portal:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "career-portal:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "career-portal",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  },
+  "cli": {
+    "analytics": "6c5fd832-8755-451d-ae2c-bbd2ed0e03d2"
+  }
+}

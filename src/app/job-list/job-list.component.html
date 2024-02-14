@@ -1,0 +1,35 @@
+<novo-loading *ngIf="loading"></novo-loading>
+<div class="mobile-filter-container">
+<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">{{ 'FILTER'   | translate }}</button>
+
+</div>
+<div class="open-positions">
+    <span class="open-positions-text">{{ 'OPEN_POSITIONS'   | translate }} ({{ total }})</span>
+</div>
+<novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
+
+<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" (click)="loadJob(job.id)">
+    <novo-list-item>
+        <item-header>
+            <item-title><a [href]="'jobs/' + job.id" [routerLink]="'jobs/' + job.id">{{ job.title }}</a></item-title>
+        </item-header>
+        <item-header-end>
+            <app-info-chips [job]="job"></app-info-chips>
+        </item-header-end>
+    </novo-list-item>
+    <span class="category" *ngIf="job.publishedCategory && showCategory">
+        {{ job.publishedCategory?.name }}
+    </span>
+    <span class="description">
+        {{ job.publicDescription | stripHtml }}
+    </span>
+</div>
+
+</novo-list>
+<div class="load-more-button" *ngIf="!loading && moreAvailable">
+  <button theme="secondary" (click)="loadMore()" inverse>Load More</button>
+</div>
+<div class="empty-list" *ngIf="!loading && jobs.length === 0">
+  <i class="bhi-search-question"></i>
+  {{ 'NO_MATCHING_JOBS ' | translate }}
+</div>
